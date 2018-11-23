@@ -8,9 +8,7 @@ const gm = window.gm;
 
 class App extends Component {
   state = {
-    vin: "pending...",
-    useKMH: true,
-    useMPH: false
+    vin: "pending..."
   };
 
   foo = () => {
@@ -19,19 +17,12 @@ class App extends Component {
 
   showSpeed = data => {
     console.log("Data", data);
-
-    if (this.state.useKMH) {
-      var average_speed = data.average_speed;
-    } else {
-      var average_speed = Math.round(data.average_speed * 0.621);
-    }
-    this.setState({ average_speed: average_speed });
+    let average_speed = data.average_speed;
+    this.setState({ average_speed });
   };
 
   componentDidMount() {
     const vin = gm.info.getVIN();
-
-    //  do a continuous query of the car’s systems; think of it like a listener for signal values
     const vehicleData = gm.info.watchVehicleData(this.showSpeed, [
       "average_speed"
     ]);
@@ -62,19 +53,6 @@ class App extends Component {
     gm.system.closeApp();
   };
 
-  handleChange = evt => {
-    console.log("handleChange", evt, evt.target.name);
-    const name = evt.target.name;
-
-    gm.info.getVehicleData(this.showSpeed, ["average_speed"]); //  do a one-time query of the car’s systems
-
-    this.setState({
-      // code to toggle state
-      useKMH: !this.state.useKMH,
-      useMPH: !this.state.useMPH
-    });
-  };
-
   render() {
     console.log("gm", gm);
     // console.log("gm", gm.info.getVehicleData
@@ -83,25 +61,13 @@ class App extends Component {
       <div className={styles.root}>
         <div className="container">
           <div className="row">
-            <div className="col-sm text-center">
-              <h1>speed</h1>
-              <h1 className={styles.speed}>{this.state.average_speed}</h1>
-              <input
-                onChange={this.handleChange}
-                type="checkbox"
-                name="mph"
-                value="Bike"
-                checked={this.state.useMPH}
-              />
-              MPH
-              <input
-                onChange={this.handleChange}
-                type="checkbox"
-                name="kmh"
-                value="Bike"
-                checked={this.state.useKMH}
-              />
-              KPH
+            <div className="col-sm">
+              <div>VIN: {this.state.vin}</div>
+              <div>speed</div>
+              <div>Avg Speed: {this.state.average_speed}</div>
+              <button className="btn btn-primary" onClick={this.handleClose}>
+                Close
+              </button>
             </div>
           </div>
         </div>
