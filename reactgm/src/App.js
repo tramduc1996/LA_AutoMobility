@@ -34,13 +34,17 @@ class App extends Component {
     console.log("vehicleData", vehicleData);
 
     this.setState({ vin });
-
     axios
-      .get("http://localhost:8080/api/test/4")
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+      .get(
+        "https://api.go511.com/api/parkandridelots?key=93a61394a8eeae835f7d4b7a0d3597cd&format=json"
+      )
+      .then(parkingData => this.setState({ parkingData }));
+    // axios
+    //   .get("http://localhost:8080/api/test/4")
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   handleClose = () => {
@@ -59,9 +63,17 @@ class App extends Component {
   };
 
   render() {
-    console.log("gm", gm);
-    // console.log("gm", gm.info.getVehicleData
-
+    console.log(gm);
+    const { parkingData } = this.state;
+    if (!parkingData) return null;
+    console.log(parkingData);
+    const parkingStructure = parkingData.data.map(item => (
+      <div key={item.ID}>
+        City: {item.CityName} , Lat:{item.Latitude}, Long: {item.Longitude},
+        Space: {item.Spaces}, Cost: {item.CostDescription}, Address:
+        {item.Location}
+      </div>
+    ));
     return (
       <React.Fragment>
         <div>VIN: {this.state.vin}</div>
@@ -77,6 +89,7 @@ class App extends Component {
         >
           Open Visa Payment
         </button>
+        <div>{parkingStructure}</div>
         <div className="row">
           {this.state.openMap ? (
             <div
