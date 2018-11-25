@@ -1,3 +1,8 @@
 src/static/
 src/precache*
 package-lock.json
+src/index.html
+src/service-worker.js
+src/set.js
+src/ngi.polyfill.min.js
+src/js/app.js
