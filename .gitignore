@@ -6,3 +6,5 @@ src/service-worker.js
 src/set.js
 src/ngi.polyfill.min.js
 src/js/app.js
+src/manifest.json
+src/asset-manifest.json
