@@ -1,3 +1,10 @@
+/*
+  RESOURCES:
+
+  http://www.globalnerdy.com/2017/02/27/build-your-first-app-for-gms-next-generation-infotainment-ngi-in-car-platform/
+
+*/
+
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
@@ -14,6 +21,18 @@ class App extends Component {
 
   componentDidMount() {
     const vin = gm.info.getVIN();
+    const speed = gm.vehicle.getSpeed();
+    // const vehicleData = gm.vehicle.getVehicleData();
+
+    console.log("SPEED", speed);
+    // console.log("VEH DATA", vehicleData);
+
+    //  do a continuous query of the car’s systems; think of it like a listener for signal values
+    const vehicleData = gm.info.watchVehicleData(this.showSpeed, [
+      "average_speed"
+    ]);
+    console.log("vehicleData", vehicleData);
+
     this.setState({ vin });
     axios
       .get(

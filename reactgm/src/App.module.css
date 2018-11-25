@@ -1,0 +1,14 @@
+/* App.module.css */
+
+.root {
+    background-color: white;
+    margin-top: 200px;
+    padding-top: 200px;
+    font-size: 2em;
+    margin: 0 auto;
+}
+
+
+.speed {
+    font-size: 5em;
+}
