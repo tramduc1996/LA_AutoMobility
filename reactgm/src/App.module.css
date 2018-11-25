@@ -1,9 +1,10 @@
+/* App.module.css */
+
 .root {
     background-color: white;
     margin-top: 200px;
     padding-top: 200px;
     font-size: 2em;
-    /* color: blue; */
     margin: 0 auto;
 }
 
