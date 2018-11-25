@@ -33,8 +33,8 @@ class Map extends React.Component {
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
-            lat={33.9307936}
-            lng={-118.3587776}
+            lat={33.9236161111}
+            lng={-118.3977375}
             text={"Your Car Location"}
           />
         </GoogleMapReact>

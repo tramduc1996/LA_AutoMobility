@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
-import axios from "axios";
+// import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
 
@@ -16,12 +16,12 @@ class App extends Component {
     const vin = gm.info.getVIN();
     this.setState({ vin });
 
-    axios
-      .get("http://localhost:8080/api/test/4")
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    // axios
+    //   .get("http://localhost:8080/api/test/4")
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   handleClose = () => {
@@ -40,6 +40,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(gm);
     return (
       <React.Fragment>
         <div>VIN: {this.state.vin}</div>
