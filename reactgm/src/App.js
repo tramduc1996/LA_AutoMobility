@@ -10,6 +10,7 @@ import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
 import Parking from "./admin/parking/Parking";
 import axios from "axios";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
 
