@@ -4,11 +4,8 @@ import axios from "axios";
 const gm = window.gm;
 const google = window.google; // error with google undefined when reloading NGI emulator
 
-class App extends Component {
-  state = {
-    vin: "pending...",
-    merchants: []
-  };
+class Map extends Component {
+  state = {};
 
   containerRef = React.createRef(); // creates the empty box that React will fill with an element
 
@@ -50,7 +47,7 @@ class App extends Component {
     console.log(parkingData);
     console.log(LatLng);
     var map = new window.google.maps.Map(this.containerRef.current, {
-      zoom: 16,
+      zoom: 15,
       center: {
         lat: 34.053486,
         lng: -118.24248
@@ -63,6 +60,7 @@ class App extends Component {
       var marker = new window.google.maps.Marker({
         position: item,
         map: map,
+        label: "P",
         animation: window.google.maps.Animation.DROP
       });
     });
@@ -72,12 +70,13 @@ class App extends Component {
     // this function creates a map with marker using the coordinates passed in
     this.setState({ latLng: latLng });
     var map = new window.google.maps.Map(this.containerRef.current, {
-      zoom: 10,
+      zoom: 14,
       center: latLng
     });
     var marker = new window.google.maps.Marker({
       position: latLng,
       map: map,
+      label: "Car",
       animation: window.google.maps.Animation.DROP
     });
   };
@@ -137,23 +136,24 @@ class App extends Component {
   render() {
     return (
       <div className="">
-        <input
-          type="text"
-          placeholder="los angeles city hall"
-          value={this.state.destination}
-          onChange={this.handleDestinationAddress}
-        />
         <button onClick={() => this.handleDestination()}>Destination</button>
         <button onClick={() => this.directionMap()}>
           Check Parking Available
         </button>
+        <button onClick={this.props.handleListLocation} />
         <div
-          style={{padding: '2px',margin:'2px', width: "100%", height: "100vh" }}
+          style={{
+            padding: "2px",
+            margin: "2px",
+            width: "100%",
+            height: "100vh"
+          }}
           ref={this.containerRef}
         />
+        <div />
       </div>
     );
   }
 }
 
-export default App;
+export default Map;

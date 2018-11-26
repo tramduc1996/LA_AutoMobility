@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
-import Parking from "./admin/parking/Parking";
-import ParkingResults from "./admin/ParkingResults";
 import Checkout from "./admin/checkout/Checkout";
 import axios from "axios";
-import VehicleAverageSpeed from "./admin/vehicleAverageSpeed/VehicleAverageSpeed";
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
 
@@ -12,7 +9,8 @@ class App extends Component {
   state = {
     vin: "pending...",
     openMap: false,
-    openVisa: false
+    openVisa: false,
+    openListLocation: false
   };
 
   componentDidMount() {
@@ -49,16 +47,18 @@ class App extends Component {
   };
 
   handleOpenVisaPayment = () => {
-    this.setState({ openVisa: true, openMap: false });
+    this.setState({ openVisa: true, openMap: false, openListLocation: false });
 
     console.log("This is Visa Payment");
+  };
+
+  handleListLocation = () => {
+    this.setState({ openListLocation: true });
   };
 
   render() {
     console.log(gm);
     return (
-      // <div>
-      //   <Welcome />
       <React.Fragment>
         <div className="row">
           <div className="col-lg-6">
@@ -71,12 +71,6 @@ class App extends Component {
             <button className="btn btn-primary" onClick={this.handleOpenMap}>
               Open Map
             </button>
-            <button
-              className="btn btn-success"
-              onClick={this.handleOpenVisaPayment}
-            >
-              Open Visa Payment
-            </button>
           </div>
         </div>
         {this.state.openMap ? (
@@ -85,22 +79,77 @@ class App extends Component {
               className="col-lg-8 col-md-8 col-xs-8 px-0"
               style={{ width: "100%", height: "100%" }}
             >
-              <Map />
+              <Map handleListLocation={this.handleListLocation} />
             </div>
-            <div className="col-lg-4 col-md-4 col-xs-4 px-0">
-              <div className="row">
-                <div className="col-lg-12 col-md-12">
-                  <ParkingResults />
-                </div>
-                <div className="col-lg-12 col-md-12">
-                  <VehicleAverageSpeed />
+            {this.state.openListLocation ? (
+              <div
+                className="col-lg-4 col-md-4 col-xs-4"
+                style={{ paddingLeft: "0px", marginTop: "30px" }}
+              >
+                <div class="card-block">
+                  <ul
+                    class="list-group"
+                    style={{ height: "50%", fontSize: "1.5em" }}
+                  >
+                    <li
+                      onClick={this.handleOpenVisaPayment}
+                      class="list-group-item"
+                      style={{ padding: "40px 5px" }}
+                    >
+                      <span class="badge badge-success p-3 mr-2">3</span>
+                      <ul>
+                        <li>Location: 243 W 1st St, Los Angeles, CA 90012.</li>
+                        <li>Cost Description: $5.</li>
+                        <li>Spaces: Already Full.</li>
+                        <li>County Name: Los Angeles.</li>
+                      </ul>
+                    </li>
+
+                    <li
+                      onClick={this.handleOpenVisaPayment}
+                      class="list-group-item"
+                      style={{ padding: "40px 5px" }}
+                    >
+                      <span class="badge badge-warning p-3 mr-2">2</span>{" "}
+                      <ul>
+                        <li>
+                          Location: 800 N Alameda St, Los Angeles, CA 90012.{" "}
+                        </li>
+                        <li>Cost Description: $8 .</li>
+                        <li>Spaces: 5-10 mins waiting times.</li>
+                        <li>County Name: Los Angeles.</li>
+                      </ul>
+                    </li>
+                    <li
+                      onClick={this.handleOpenVisaPayment}
+                      class="list-group-item"
+                      style={{ padding: "40px 5px" }}
+                    >
+                      <span class="badge badge-danger p-3 mr-2">1</span>
+                      <ul>
+                        <li>Location: Union Station East. </li>
+                        <li>Cost Description: Metro Link Rider Only. Free.</li>
+                        <li>Spaces: 50 slots. </li>
+                        <li>County Name: Los Angeles.</li>
+                      </ul>
+                    </li>
+                  </ul>
                 </div>
               </div>
+            ) : null}
+          </div>
+        ) : null}
+        {this.state.openVisa ? (
+          <div className="row">
+            <div
+              className="col-lg-12 col-md-12 col-xs-12 px-0"
+              style={{ width: "100%", height: "100%" }}
+            >
+              <Checkout />
             </div>
           </div>
         ) : null}
       </React.Fragment>
-      // </div>
     );
   }
 }
