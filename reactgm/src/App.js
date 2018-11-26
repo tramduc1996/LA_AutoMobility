@@ -15,6 +15,8 @@ import GreenParking from "./admin/greenParking";
 import YellowParking from "./admin/YellowParking";
 import RedParking from "./admin/RedParking";
 import PaymentModal from "./admin/PaymentModal";
+// import Welcome from "./admin/Welcome";
+// import { Button } from "reactstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
@@ -79,6 +81,8 @@ class App extends Component {
   render() {
     console.log(gm);
     return (
+      // <div>
+      //   <Welcome />
       <React.Fragment>
         <div>VIN: {this.state.vin}</div>
         <br />
@@ -113,14 +117,12 @@ class App extends Component {
               <br />
               <br />
               <ParkingResults />
-              {/* <GreenParking />
-              <YellowParking />
-              <RedParking /> */}
             </div>
           ) : null}
           <Checkout />
         </div>
       </React.Fragment>
+      // </div>
     );
   }
 }
