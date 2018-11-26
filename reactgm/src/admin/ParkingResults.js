@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardTitle } from "reactstrap";
+import { Nav, NavLink, Card, CardTitle } from "reactstrap";
 import GreenParking from "./GreenParking";
 import YellowParking from "./YellowParking";
 import RedParking from "./RedParking";

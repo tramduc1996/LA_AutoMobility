@@ -11,7 +11,10 @@
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "reactstrap": "^6.5.0"
+    "react-simple-keyboard": "^1.12.4",
+    "react-virtual-keyboard": "^1.0.2",
+    "reactstrap": "^6.5.0",
+    "virtual-keyboard-plugin": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
