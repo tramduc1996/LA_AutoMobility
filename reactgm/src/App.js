@@ -9,7 +9,10 @@ import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
 import axios from "axios";
-
+import ParkingResults from "./admin/ParkingResults";
+import GreenParking from "./admin/greenParking";
+import YellowParking from "./admin/YellowParking";
+import RedParking from "./admin/RedParking";
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
 
