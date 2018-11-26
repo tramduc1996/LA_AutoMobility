@@ -15,7 +15,6 @@ import GreenParking from "./admin/greenParking";
 import YellowParking from "./admin/YellowParking";
 import RedParking from "./admin/RedParking";
 import PaymentModal from "./admin/PaymentModal";
-import LandingPage from "./admin/LandingPage";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
