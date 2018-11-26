@@ -8,7 +8,13 @@
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
-
+import Checkout from "./admin/checkout/Checkout";
+import axios from "axios";
+import ParkingResults from "./admin/ParkingResults";
+import GreenParking from "./admin/greenParking";
+import YellowParking from "./admin/YellowParking";
+import RedParking from "./admin/RedParking";
+import PaymentModal from "./admin/PaymentModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
 
@@ -41,6 +47,18 @@ class App extends Component {
     //     console.log(res);
     //   })
     //   .catch(err => console.log(err));
+
+    axios
+      .post("http://localhost:8080/api/vqi/")
+      .then(response => {
+        console.log("MERCHANTS", response);
+        this.setState({
+          merchants: response.data.item.responseData.merchantList
+        });
+      })
+      .catch(error => {
+        console.log("Error access Visa Quest Insights");
+      });
   }
 
   handleClose = () => {
@@ -90,8 +108,16 @@ class App extends Component {
               style={{ margin: "0 auto" }}
             >
               <VisaPayment />
+              <br />
+              <br />
+              <br />
+              <ParkingResults />
+              {/* <GreenParking />
+              <YellowParking />
+              <RedParking /> */}
             </div>
           ) : null}
+          <Checkout />
         </div>
       </React.Fragment>
     );

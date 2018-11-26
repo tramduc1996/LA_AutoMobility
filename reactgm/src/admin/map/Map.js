@@ -1,13 +1,3 @@
-/* RESOURCES: 
-
-    https://loubodde.com/2017/06/19/infotainment-map-tut/
-    https://ctejas.wordpress.com/2017/10/14/gm-vehicle-infotainment-app/
-
-USER ID: XNGRTVZ9WDRB2EKLEXHR21bfvbxEYJQuzOAR0gRCVU9nuJsmQ
-
-PW: ehUEinyd68B2BrpSHZHsJnx6ZBOYgTANMHVlQY
-    You may use the Position Panel with the map. Select the "Move marker with map" to sync the panel settings with this map
-*/
 import React, { Component } from "react";
 import axios from "axios";
 
@@ -16,7 +6,8 @@ const google = window.google; // error with google undefined when reloading NGI 
 
 class App extends Component {
   state = {
-    vin: "pending..."
+    vin: "pending...",
+    merchants: []
   };
 
   containerRef = React.createRef(); // creates the empty box that React will fill with an element
@@ -92,6 +83,7 @@ class App extends Component {
 
   componentDidMount() {
     const vin = gm.info.getVIN();
+
     this.setState({ vin });
 
     //  do continuous query of the car’s systems; think of it like a listener for signal values
