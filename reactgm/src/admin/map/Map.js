@@ -1,3 +1,5 @@
+import axios from "axios";
+
 /* RESOURCES: 
 
     https://loubodde.com/2017/06/19/infotainment-map-tut/
@@ -15,7 +17,8 @@ const google = window.google; // error with google undefined when reloading NGI 
 
 class App extends Component {
   state = {
-    vin: "pending..."
+    vin: "pending...",
+    merchants: []
   };
 
   containerRef = React.createRef(); // creates the empty box that React will fill with an element
@@ -61,6 +64,7 @@ class App extends Component {
 
   componentDidMount() {
     const vin = gm.info.getVIN();
+
     this.setState({ vin });
 
     //  do continuous query of the car’s systems; think of it like a listener for signal values

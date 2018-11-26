@@ -8,6 +8,7 @@
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
+import Checkout from "./admin/checkout/Checkout";
 import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -46,6 +47,18 @@ class App extends Component {
     //     console.log(res);
     //   })
     //   .catch(err => console.log(err));
+
+    axios
+      .post("http://localhost:8080/api/vqi/")
+      .then(response => {
+        console.log("MERCHANTS", response);
+        this.setState({
+          merchants: response.data.item.responseData.merchantList
+        });
+      })
+      .catch(error => {
+        console.log("Error access Visa Quest Insights");
+      });
   }
 
   handleClose = () => {
@@ -65,6 +78,7 @@ class App extends Component {
 
   render() {
     console.log(gm);
+    console.log("STATE", this.state);
     const { parkingData } = this.state;
     if (!parkingData) return null;
     console.log(parkingData);
@@ -108,6 +122,7 @@ class App extends Component {
               <VisaPayment />
             </div>
           ) : null}
+          <Checkout />
         </div>
       </React.Fragment>
     );
