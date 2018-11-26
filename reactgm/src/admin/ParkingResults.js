@@ -7,33 +7,23 @@ import RedParking from "./RedParking";
 class ParkingResults extends React.Component {
   render() {
     console.log("rendering");
-
-    let styleParking = {
-      color: "#595454",
-      fontSize: 28
-    };
     return (
-      <div>
-        <Card body style={{ borderColor: "#28D094" }}>
+      <div style={{ marginTop: "26px" }}>
+        <Card body style={{ borderColor: "lightGrey", height: "70vh" }}>
           <CardTitle>
-            <span style={styleParking}>Parking Options</span>
+            <h4 className="text-center">Parking Options</h4>
           </CardTitle>
-          <br />
           <br />
           <div>
             <GreenParking />
           </div>
           <br />
-          <br />
           <div>
             <YellowParking />
           </div>
           <br />
-          <br />
           <div>
             <RedParking />
-            <br />
-            <br />
             <br />
           </div>
         </Card>

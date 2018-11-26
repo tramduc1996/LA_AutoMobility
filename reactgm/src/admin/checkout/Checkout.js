@@ -23,11 +23,12 @@ class Checkout extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ margin: "0 auto", padding: "250px 0" }}>
         <img
           alt="Visa Checkout"
           className="v-button"
           role="button"
+          style={{ width: "100%", height: "10vh" }}
           src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png"
         />
       </div>
