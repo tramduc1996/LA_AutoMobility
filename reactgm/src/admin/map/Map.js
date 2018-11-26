@@ -31,6 +31,10 @@ class App extends Component {
 
     gm.info.getCurrentPosition(pos => {
       var latLng = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      var lat = pos.coords.latitude;
+      var lng = pos.coords.longitude;
+      this.setState({ lat });
+      this.setState({ lng });
       this.initMap(latLng);
     }, true);
 
@@ -43,13 +47,17 @@ class App extends Component {
     const LatLng = this.state.position;
     const latLng = this.state.latLng;
     const parkingData = this.state.parkingData;
+    console.log(parkingData);
     console.log(LatLng);
     var map = new window.google.maps.Map(this.containerRef.current, {
-      zoom: 14,
-      center: latLng
+      zoom: 16,
+      center: {
+        lat: 34.053486,
+        lng: -118.24248
+      }
     });
     const city = parkingData.filter(data => {
-      return data.CostDescription == "Free";
+      return data.Spaces > 1;
     });
     LatLng.map(item => {
       var marker = new window.google.maps.Marker({
@@ -95,19 +103,49 @@ class App extends Component {
         ]);
       });
   }
-
+  handleDestination = () => {
+    const dest = { address: this.state.destination };
+    console.log(dest);
+    gm.nav.setDestination(set => {
+      console.log("set===", set);
+    }, dest);
+    gm.nav.getDestination(get => {
+      console.log("get===", get);
+    }, true);
+    // const lat = this.state.lat;
+    // const lng = this.state.lng;
+    // const destination = encodeURI(this.state.destination);
+    // console.log(destination);
+    // axios
+    //   .get(
+    //     `https://maps.googleapis.com/maps/api/directions/json?origin=${lat},${lng}&destination=${destination}&mode=transit&key=AIzaSyAaqxl4Rve6wjojceW0oC6mXRoDjObVNE0`
+    //   )
+    //   .then(response => {
+    //     var directionsDisplay = new google.maps.DirectionsRenderer();
+    //     var directionService = new google.maps.DirectionsService();
+    //     directionService.route(directionsDisplay.setDirections(response));
+    //   });
+  };
+  handleDestinationAddress = e => {
+    const destination = e.target.value;
+    this.setState({ destination });
+  };
   handleClose = () => {
     gm.system.closeApp();
   };
 
   render() {
     return (
-      <div>
-        <button
-          onClick={() => this.directionMap()}
-          className="btn btn-default ml-2"
-        >
-          Click
+      <div className="">
+        <input
+          type="text"
+          placeholder="los angeles city hall"
+          value={this.state.destination}
+          onChange={this.handleDestinationAddress}
+        />
+        <button onClick={() => this.handleDestination()}>Destination</button>
+        <button onClick={() => this.directionMap()}>
+          Check Parking Available
         </button>
         <div
           style={{padding: '2px',margin:'2px', width: "100%", height: "100vh" }}

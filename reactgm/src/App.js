@@ -57,6 +57,8 @@ class App extends Component {
   render() {
     console.log(gm);
     return (
+      // <div>
+      //   <Welcome />
       <React.Fragment>
         <div className="row">
           <div className="col-lg-6">
@@ -98,6 +100,7 @@ class App extends Component {
           </div>
         ) : null}
       </React.Fragment>
+      // </div>
     );
   }
 }
