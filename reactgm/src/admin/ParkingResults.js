@@ -1,16 +1,12 @@
 import React from "react";
 import { Card, CardTitle } from "reactstrap";
-import { withRouter } from "react-router-dom";
+import GreenParking from "./GreenParking";
+import YellowParking from "./YellowParking";
+import RedParking from "./RedParking";
 
 class ParkingResults extends React.Component {
   render() {
     console.log("rendering");
-
-    const { parking } = this.state;
-    let style = {
-      color: "#f50a58",
-      fontSize: 20
-    };
 
     let styleParking = {
       color: "#595454",
@@ -19,14 +15,30 @@ class ParkingResults extends React.Component {
     return (
       <div>
         <Card body style={{ borderColor: "#28D094" }}>
-          <CardTitle className={style.header}>
+          <CardTitle>
             <span style={styleParking}>Parking Options</span>
           </CardTitle>
           <br />
           <br />
+          <div>
+            <GreenParking />
+          </div>
+          <br />
+          <br />
+          <div>
+            <YellowParking />
+          </div>
+          <br />
+          <br />
+          <div>
+            <RedParking />
+            <br />
+            <br />
+            <br />
+          </div>
         </Card>
       </div>
     );
   }
 }
-export default withRouter(ParkingResults);
+export default ParkingResults;
