@@ -1,4 +1,5 @@
 import React from "react";
+import Checkout from "../checkout/Checkout";
 
 const VisaPayment = props => {
   return (
@@ -103,6 +104,7 @@ const VisaPayment = props => {
           </div>
         </form>
       </div>
+      <Checkout />
     </div>
   );
 };
