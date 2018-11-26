@@ -8,6 +8,7 @@
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
+import Checkout from "./admin/checkout/Checkout";
 import axios from "axios";
 import ParkingResults from "./admin/ParkingResults";
 import GreenParking from "./admin/greenParking";
@@ -39,17 +40,25 @@ class App extends Component {
     console.log("vehicleData", vehicleData);
 
     this.setState({ vin });
-    axios
-      .get(
-        "https://api.go511.com/api/parkandridelots?key=93a61394a8eeae835f7d4b7a0d3597cd&format=json"
-      )
-      .then(parkingData => this.setState({ parkingData }));
+
     // axios
     //   .get("http://localhost:8080/api/test/4")
     //   .then(res => {
     //     console.log(res);
     //   })
     //   .catch(err => console.log(err));
+
+    axios
+      .post("http://localhost:8080/api/vqi/")
+      .then(response => {
+        console.log("MERCHANTS", response);
+        this.setState({
+          merchants: response.data.item.responseData.merchantList
+        });
+      })
+      .catch(error => {
+        console.log("Error access Visa Quest Insights");
+      });
   }
 
   handleClose = () => {
@@ -66,22 +75,12 @@ class App extends Component {
 
     console.log("This is Visa Payment");
   };
-
   render() {
     console.log(gm);
-    const { parkingData } = this.state;
-    if (!parkingData) return null;
-    console.log(parkingData);
-    const parkingStructure = parkingData.data.map(item => (
-      <div key={item.ID}>
-        City: {item.CityName} , Lat:{item.Latitude}, Long: {item.Longitude},
-        Space: {item.Spaces}, Cost: {item.CostDescription}, Address:
-        {item.Location}
-      </div>
-    ));
     return (
       <React.Fragment>
         <div>VIN: {this.state.vin}</div>
+        <br />
         <button className="btn btn-default" onClick={this.handleClose}>
           Close
         </button>
@@ -94,7 +93,6 @@ class App extends Component {
         >
           Open Visa Payment
         </button>
-        <div>{parkingStructure}</div>
         <div className="row">
           {this.state.openMap ? (
             <div
@@ -119,6 +117,7 @@ class App extends Component {
               <RedParking /> */}
             </div>
           ) : null}
+          <Checkout />
         </div>
       </React.Fragment>
     );
