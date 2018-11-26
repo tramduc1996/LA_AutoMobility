@@ -14,6 +14,7 @@ import ParkingResults from "./admin/ParkingResults";
 import GreenParking from "./admin/greenParking";
 import YellowParking from "./admin/YellowParking";
 import RedParking from "./admin/RedParking";
+import VehicleAverageSpeed from "./admin/vehicleAverageSpeed/VehicleAverageSpeed";
 import PaymentModal from "./admin/PaymentModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
@@ -118,6 +119,7 @@ class App extends Component {
             </div>
           ) : null}
           <Checkout />
+          <VehicleAverageSpeed />
         </div>
       </React.Fragment>
     );
