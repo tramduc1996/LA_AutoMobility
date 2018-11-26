@@ -60,7 +60,7 @@ class App extends Component {
     const parkingData = this.state.parkingData;
     console.log(LatLng);
     var map = new window.google.maps.Map(this.containerRef.current, {
-      zoom: 14,
+      zoom: 16,
       center: latLng
     });
     const city = parkingData.filter(data => {
