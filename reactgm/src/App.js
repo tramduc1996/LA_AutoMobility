@@ -8,6 +8,7 @@
 import React, { Component } from "react";
 import Map from "./admin/map/Map";
 import VisaPayment from "./admin/visaPayment/VisaPayment";
+import Parking from "./admin/parking/Parking";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 const gm = window.gm;
@@ -62,6 +63,10 @@ class App extends Component {
     console.log("This is Visa Payment");
   };
 
+  handleSubmit = () => {
+    alert("Your Payment is Confirmed!!!");
+  };
+
   render() {
     console.log(gm);
     const { parkingData } = this.state;
@@ -104,7 +109,7 @@ class App extends Component {
               className="col-lg-5 col-md-5 col-xs-5"
               style={{ margin: "0 auto" }}
             >
-              <VisaPayment />
+              <VisaPayment handleSubmit={this.handleSubmit} />
             </div>
           ) : null}
         </div>
